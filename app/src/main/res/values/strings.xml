@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">EcoSnapWireFrame</string>
+    <string name="ecoSnap">EcoSnap</string>
+    <string name="logIn">Log In</string>
+    <string name="logOut">Log Out</string>
+    <string name="noAccount">Don\'t have an Account? Sign Up</string>
+    <string name="createAccount">Create Account</string>
+    <string name="signUp">Sign Up</string>
+    <string name="welcomeMsge">Welcome Fellow Turtle!</string>
+    <string name="mission">SNAP.SORT.SAVE THE PLANET.</string>
+    <string name="instruction">Take a picture to find out if the product is recyclable or not</string>
+    <string name="captureImg">Capture an Image</string>
+    <string name="checkResult">Check whether Recyclable or Not</string>
+    <string name="recyclable">Recyclable</string>
+    <string name="instruction2">Your item is recyclable, please take it to MSU Recycling Public
+Drop-Off, Green Way, East Lansing, MI 48823.</string>
+    <string name="gMapsUI">Click here to find the nearest recycle centers</string>
+    <string name="camera_button_description">Capture another image</string>
+    <string name="turtle_waving">Turtle Waving!</string>
+    <string name="earth">Earth Recycle</string>
+    <string name="plastic">Plastic Bottle on the ground</string>
+    <string name="recycleLogo">Recycle Logo</string>
+    <string name="userHint">Username or Email</string>
+    <string name="userPassHint">Password</string>
+    <string name="welcomeUser">Welcome %1$s!</string>
+    <string name="cameraImage">Image captured by user</string>
+</resources>
