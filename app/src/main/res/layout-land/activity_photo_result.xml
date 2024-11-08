@@ -3,7 +3,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="16dp"
@@ -11,7 +10,7 @@
 
     <!-- ImageView on the left -->
     <ImageView
-        android:id="@+id/userPic"
+        android:id="@+id/resultImageView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -38,35 +37,21 @@
 
         <!-- TextView to display recyclability status -->
         <TextView
-            android:id="@+id/googleMaps"
-            android:layout_width="333dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/gMapsUI"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.902"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            android:id="@+id/item_recyclable_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recyclable_status"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp" />
 
         <!-- Button to go back to the WelcomeActivity -->
-        <ImageButton
-            android:id="@+id/cameraButton"
-            android:layout_width="99dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="#EDE8D0"
-            android:contentDescription="@string/camera_button_description"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.841"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userPic"
-            app:srcCompat="@drawable/camera" />
+        <Button
+            android:id="@+id/btnCheckResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Check Results"
+            android:layout_marginTop="32dp" />
     </LinearLayout>
     <Button
         android:id="@+id/logOut"
@@ -80,9 +65,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent" />
-
-
-
 </LinearLayout>
-
-

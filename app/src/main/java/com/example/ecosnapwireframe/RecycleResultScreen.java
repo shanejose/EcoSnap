@@ -39,11 +39,12 @@ public class RecycleResultScreen extends AppCompatActivity {
         userPic = findViewById(R.id.userPic);
         googleMap = findViewById(R.id.googleMaps);
 
-        String photoUri = getIntent().getStringExtra("photoURI");
+        String photoUri = getIntent().getStringExtra("imageURI");
 
         if(photoUri != null){
             Uri cameraPic = Uri.parse(photoUri);
             userPic.setImageURI(cameraPic);
+            userPic.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
         googleMap.setOnClickListener(new View.OnClickListener() {

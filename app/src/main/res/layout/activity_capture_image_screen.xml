@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:background="@color/mainTheme"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CaptureImageScreen">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/mainTheme"
+    >
 
+    <!-- Camera Preview -->
+
+    <!-- Image for the camera prompt -->
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="354dp"
+        android:layout_height="576dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1" />
 
     <ImageView
-        android:id="@+id/capturedImage"
-        android:layout_width="332dp"
-        android:layout_height="332dp"
-        android:layout_marginBottom="164dp"
-        android:contentDescription="@string/cameraImage"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@id/picResults"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
 
-    <Button
-        android:id="@+id/picResults"
-        android:layout_width="209dp"
-        android:layout_height="78dp"
-        android:text="@string/checkResult"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+    <!-- Text prompting the user to capture an image -->
+    <TextView
+        android:id="@+id/cameraPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capture_prompt"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
 
+    <!-- Button for capturing an image -->
     <Button
-        android:id="@+id/logOut"
-        android:layout_width="131dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="6dp"
-        android:text="@string/logOut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:id="@+id/btnCapture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/capture_button"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+
+

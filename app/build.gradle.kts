@@ -53,16 +53,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //Google Maps
     implementation("com.google.android.gms:play-services-maps:19.0.0")
 
+    //CameraX
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
 
-
-
-//    implementation("androidx.camera:camera-camera2:1.5.0-alpha02")
-//    implementation("androidx.camera:camera-lifecycle:1.5.0-alpha02") // Lifecycle support for CameraX
-//    implementation("androidx.camera:camera-view:1.5.0-alpha02") // Optional: for CameraView
-//    implementation("androidx.camera:camera-extensions:1.5.0-alpha02")
-//
-//    // Optional: For image analysis, include the following
-//    // implementation("androidx.camera:camera-mlkit:1.1.0") // For ML Kit integration if needed
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/mainTheme"
+    >
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/logOut" />
+
+    <!-- ImageView at the top -->
+    <ImageView
+        android:id="@+id/resultImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
+
+    <!-- LinearLayout at the bottom for text and button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- TextView for displaying instructions about results -->
+        <TextView
+            android:id="@+id/result_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/result_title"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <!-- TextView to display recyclability status -->
+        <TextView
+            android:id="@+id/item_recyclable_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/recyclable_status"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <!-- Button to go back to the WelcomeActivity -->
+        <Button
+            android:id="@+id/btnCheckResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Check Results" />
+    </LinearLayout>
+
+</LinearLayout>
