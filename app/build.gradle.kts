@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.googleServices)
+
 }
 
 android {
@@ -55,7 +57,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     //Google Maps
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation(libs.googleMaps)
 
     //CameraX
     implementation(libs.androidx.core.ktx)
@@ -63,5 +65,14 @@ dependencies {
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
+
+    // Import Firebase Dependencies
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.guava)
+    implementation(libs.firebase.database)
+    implementation(libs.googlePlayServicesBase)
+
 
 }
