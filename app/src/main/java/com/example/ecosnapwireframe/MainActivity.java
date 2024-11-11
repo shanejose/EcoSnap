@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } else {
                         Log.d(authLogTag, "No such document");
+                        Toast.makeText(MainActivity.this, "Incorrect Username or Password!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Log.d(authLogTag, "get failed with ", task.getException());
