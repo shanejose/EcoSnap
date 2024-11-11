@@ -28,4 +28,7 @@ Drop-Off, Green Way, East Lansing, MI 48823.</string>
     <string name="capture_button">Capture</string>
     <string name="recyclable_status">Is the item recyclable?</string>
     <string name="result_title">Result of Item Analysis</string>
+    <string name="incorrect_username_or_password">Incorrect username or password</string>
+    <string name="invalid_username_or_password">Invalid username or password</string>
+    <string name="user_name_taken">Username taken</string>
 </resources>

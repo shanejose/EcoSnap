@@ -1,5 +1,9 @@
 package com.example.ecosnapwireframe;
 
+import static android.content.ContentValues.TAG;
+import static java.lang.String.valueOf;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,17 +12,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText username;
     private TextInputEditText password;
     private TextView signUp;
+    private TextView signInError;
 
     private FirebaseFirestore db;
 
+    private final String authLogTag = "AUTH";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.userPassword);
         signUp = findViewById(R.id.signUp);
+        signInError = findViewById(R.id.signInError);
+
+        signInError.setVisibility(View.GONE);
 
         db = FirebaseFirestore.getInstance();
 
@@ -54,13 +71,8 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameValue = username.getText().toString();
-                addUserToFirebase(usernameValue);
-                Intent intent = new Intent(MainActivity.this, HomeScreen.class);
-                intent.putExtra("UserName", usernameValue);
-                // resets password to empty string after Log-In
-                password.setText("");
-                startActivity(intent);
+                Log.d(authLogTag, "Attempting to authenticate user");
+                authenticateUser(valueOf(username.getText()), valueOf(password.getText()));
             }
         });
 
@@ -75,30 +87,46 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+    private void authenticateUser(String uname, String pw) {
+        try {
+            DocumentReference docRef = db.collection("users").document(uname);
+            docRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(authLogTag, "DocumentSnapshot data: " + document.getData());
+                        Map<String, Object> user = document.getData();
+                        try {
+                            assert user != null;
+                            if (user.get("password").equals(pw)) {
+                                String usernameValue = username.getText().toString();
+                                Log.d(authLogTag, "User is authentic, logging in.");
+                                Intent intent = new Intent(MainActivity.this, HomeScreen.class);
+                                intent.putExtra("UserName", usernameValue);
+                                // resets password to empty string after Log-In
+                                password.setText("");
+                                startActivity(intent);
+                            }
+                            else {
+                                signInError.setVisibility(View.VISIBLE);
+                            }
+                        } catch (Exception e) {
+                            Log.d(authLogTag, "Error authenticating user.");
+                        }
+                    } else {
+                        Log.d(authLogTag, "No such document");
+                    }
+                } else {
+                    Log.d(authLogTag, "get failed with ", task.getException());
+                }
+            });
+        }
+        catch(Exception e) {
+            signInError.setVisibility(View.VISIBLE);
+        }
 
-    // Firebase test Function
-    // Adds user names to database "user"
-    private void addUserToFirebase(String username){
-
-        // Create a new user with a username field
-        Map<String, Object> user = new HashMap<>();
-        user.put("username", username);
-        Log.v("goes to firesbase","tries to add data");
-        // Add a new document with a generated ID in the "users" collection
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(documentReference -> {
-                    // Successfully added document
-                   Log.v("Success adding a user","added a user");
-                })
-                .addOnFailureListener(e -> {
-                    // Error adding document
-                    Log.v("Error adding a user",e.getMessage());
-                });
     }
 
 }
