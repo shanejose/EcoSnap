@@ -64,7 +64,7 @@
 
 
 
-            <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="297dp"
@@ -102,22 +102,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-    <TextView
-        android:id="@+id/signInError"
-        android:layout_width="237dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="bottom|center"
-        android:text="@string/incorrect_username_or_password"
-        android:textColor="#E90606"
-
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logIn" />
 
     <TextView
         android:id="@+id/signUp"
@@ -134,6 +118,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInError" />
+        app:layout_constraintTop_toBottomOf="@+id/logIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

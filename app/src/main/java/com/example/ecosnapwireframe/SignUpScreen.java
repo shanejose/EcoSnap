@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ public class SignUpScreen extends AppCompatActivity {
     private Button signUp;
     private TextInputEditText username;
     private TextInputEditText password;
-    private TextView signUpError;
+
 
     private FirebaseFirestore db;
 
@@ -54,9 +55,6 @@ public class SignUpScreen extends AppCompatActivity {
         signUp = findViewById(R.id.signUp);
         username = findViewById(R.id.username);
         password = findViewById(R.id.userPassword);
-        signUpError = findViewById(R.id.accCreationError);
-
-        signUpError.setVisibility(View.GONE);
 
         //Goes to Log-In Screen after creating an account
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +63,8 @@ public class SignUpScreen extends AppCompatActivity {
                 if(!valueOf(password.getText()).equals("")) {
                     addUserToFirebase(valueOf(username.getText()), valueOf(password.getText()));
                 } else {
-                    signUpError.setVisibility(View.VISIBLE);
-                    String error = getString(R.string.invalid_username_or_password);
-                    signUpError.setText(error);
+                    Toast.makeText(SignUpScreen.this, "Incorrect Username or Password!", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -82,9 +79,8 @@ public class SignUpScreen extends AppCompatActivity {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     Log.d(TAG, "User already exists");
-                    signUpError.setVisibility(View.VISIBLE);
-                    String error = getString(R.string.user_name_taken);
-                    signUpError.setText(error);
+                    Toast.makeText(SignUpScreen.this, "User already exists!", Toast.LENGTH_SHORT).show();
+
                 } else {
                     CollectionReference users = db.collection("users");
                     // Create a new user with a username field

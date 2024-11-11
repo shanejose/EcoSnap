@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText username;
     private TextInputEditText password;
     private TextView signUp;
-    private TextView signInError;
+
 
     private FirebaseFirestore db;
 
@@ -61,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.userPassword);
         signUp = findViewById(R.id.signUp);
-        signInError = findViewById(R.id.signInError);
 
-        signInError.setVisibility(View.GONE);
 
         db = FirebaseFirestore.getInstance();
 
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                             else {
-                                signInError.setVisibility(View.VISIBLE);
+                                Toast.makeText(MainActivity.this, "Incorrect Username or Password!", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             Log.d(authLogTag, "Error authenticating user.");
@@ -124,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         catch(Exception e) {
-            signInError.setVisibility(View.VISIBLE);
+            Toast.makeText(MainActivity.this, "Incorrect Username or Password!", Toast.LENGTH_SHORT).show();
+
         }
 
     }

@@ -102,6 +102,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/signInError"-->
+<!--        android:layout_width="237dp"-->
+<!--        android:layout_height="49dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true"-->
+<!--        android:gravity="bottom|center"-->
+<!--        android:text="@string/incorrect_username_or_password"-->
+<!--        android:textColor="#E90606"-->
+
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.854"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/signUp" />-->
+
     <TextView
         android:id="@+id/signUp"
         android:layout_width="237dp"
@@ -116,9 +133,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@id/ecoSnap"
-        app:layout_constraintTop_toBottomOf="@+id/logIn" />
+        app:layout_constraintTop_toBottomOf="@+id/logIn"
+        app:layout_constraintVertical_bias="0.461" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
