@@ -13,15 +13,11 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.IOException;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.io.File;
+import java.io.IOException;
 
 public class PhotoResult extends AppCompatActivity {
-
     private ImageView resultImageView;
     private Button checkResults;
     private Button logOutBtn;
@@ -36,10 +32,11 @@ public class PhotoResult extends AppCompatActivity {
         checkResults = findViewById(R.id.btnCheckResults);
         logOutBtn = findViewById(R.id.logOut);
 
+        // Retrieve the image URI from the intent
         String imageUri = getIntent().getStringExtra("imageUri");
         File imageFile = new File(imageUri);
 
-        // Display the captured image
+        // Display the captured image if it exists
         if (imageFile.exists()) {
             Bitmap originalBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
 
@@ -56,24 +53,16 @@ public class PhotoResult extends AppCompatActivity {
             Toast.makeText(this, "Image not found!", Toast.LENGTH_SHORT).show();
         }
 
-        checkResults.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PhotoResult.this, RecycleResultScreen.class);
-                intent.putExtra("imageURI",imageUri);
-                startActivity(intent);
-
-            }
+        checkResults.setOnClickListener(view -> {
+            Intent intent = new Intent(PhotoResult.this, RecycleResultScreen.class);
+            intent.putExtra("imageURI", imageUri);
+            startActivity(intent);
         });
 
-        logOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PhotoResult.this, MainActivity.class);
-                startActivity(intent);
-            }
+        logOutBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(PhotoResult.this, MainActivity.class);
+            startActivity(intent);
         });
-
     }
 
     private Bitmap rotateImageIfRequired(Bitmap img, String imagePath) {
@@ -98,7 +87,6 @@ public class PhotoResult extends AppCompatActivity {
         return img;
     }
 
-    // Helper method to rotate the image by a specific degree
     private Bitmap rotateImage(Bitmap img, int degree) {
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
@@ -124,6 +112,4 @@ public class PhotoResult extends AppCompatActivity {
         long averageBrightness = totalBrightness / (width * height);
         return averageBrightness < 50; // Low-light threshold
     }
-
-
 }

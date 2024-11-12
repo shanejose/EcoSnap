@@ -1,140 +1,106 @@
 package com.example.ecosnapwireframe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.*;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.camera.core.Preview;
-import androidx.camera.core.CameraSelector;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.common.util.concurrent.ListenableFuture;
-
 import java.io.File;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-
 
 public class CaptureImageScreen extends AppCompatActivity {
-
-
-    private static final String TAG = "CameraActivity";
-    private static final int CAMERA_REQUEST_CODE = 100;
 
     private PreviewView previewView;
     private ImageCapture imageCapture;
     private Button captureButton;
 
+    private static final int CAMERA_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_capture_image_screen);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
 
         previewView = findViewById(R.id.previewView);
         captureButton = findViewById(R.id.btnCapture);
 
-        // Check for camera permission
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
         } else {
-            startCamera();
+            setupCamera();
         }
 
-        // Capture button listener
-        captureButton.setOnClickListener(v -> takePicture());
+        captureButton.setOnClickListener(v -> takePhoto(this));
     }
 
-    private void startCamera() {
+    private void setupCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                bindPreview(cameraProvider);
+                bindCameraUseCases(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
-                Log.e(TAG, "Error starting camera: " + e.getMessage());
+                Log.e("CameraX", "Error setting up camera: " + e.getMessage());
             }
-        }, getExecutor());
+        }, ContextCompat.getMainExecutor(this));
     }
 
-    private void bindPreview(ProcessCameraProvider cameraProvider) {
+    private void bindCameraUseCases(@NonNull ProcessCameraProvider cameraProvider) {
         Preview preview = new Preview.Builder().build();
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+
+        imageCapture = new ImageCapture.Builder()
+                .setTargetRotation(previewView.getDisplay().getRotation())
                 .build();
 
-        imageCapture = new ImageCapture.Builder().build();
-        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+        CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
 
         cameraProvider.unbindAll();
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
     }
 
-    private void takePicture() {
-        File photoFile = new File(getExternalFilesDir(null), "captured_image.jpg");
+    private void takePhoto(Context context) {
+        File directory = context.getFilesDir();
+        File photoFile = new File(directory, "photo_" + System.currentTimeMillis() + ".jpg");
         ImageCapture.OutputFileOptions outputOptions = new ImageCapture.OutputFileOptions.Builder(photoFile).build();
 
-        imageCapture.takePicture(outputOptions, getExecutor(), new ImageCapture.OnImageSavedCallback() {
-            @Override
-            public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
-                // Notify the user that the image was captured
-                Toast.makeText(CaptureImageScreen.this, "Image Captured! Please wait a few seconds as we process the photo", Toast.LENGTH_SHORT).show();
+        imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(context),
+                new ImageCapture.OnImageSavedCallback() {
+                    @Override
+                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults output) {
+                        Toast.makeText(context, "Photo saved at: " + photoFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+                        Log.d("CameraX", "Photo saved at: " + photoFile.getAbsolutePath());
 
-                // Immediately move to ResultActivity without checks
-                Intent intent = new Intent(CaptureImageScreen.this, PhotoResult.class);
-                intent.putExtra("imageUri", photoFile.getAbsolutePath());
-                startActivity(intent);
-                finish();
-            }
+                        Intent intent = new Intent(context, PhotoResult.class);
+                        intent.putExtra("imageUri", photoFile.getAbsolutePath());
+                        startActivity(intent);
+                    }
 
-            @Override
-            public void onError(ImageCaptureException error) {
-                Log.e(TAG, "Photo capture failed: " + error.getMessage());
-                Toast.makeText(CaptureImageScreen.this, "Capture failed. Please try again.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onError(@NonNull ImageCaptureException exception) {
+                        Log.e("CameraX", "Photo capture failed: " + exception.getMessage(), exception);
+                        Toast.makeText(context, "Photo capture failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCamera();
-            } else {
-                Toast.makeText(this, "Camera permission is required to use the camera.", Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == CAMERA_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            setupCamera();
+        } else {
+            Toast.makeText(this, "Camera permission is required", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private Executor getExecutor() {
-        return ContextCompat.getMainExecutor(this);
-    }
-
 }
