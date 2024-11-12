@@ -60,10 +60,10 @@ public class SignUpScreen extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!valueOf(password.getText()).equals("")) {
+                if(!valueOf(username.getText()).equals("") && !valueOf(password.getText()).equals("")) {
                     addUserToFirebase(valueOf(username.getText()), valueOf(password.getText()));
                 } else {
-                    Toast.makeText(SignUpScreen.this, "Incorrect Username or Password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpScreen.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
 
                 }
             }
