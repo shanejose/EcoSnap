@@ -20,7 +20,6 @@ import java.io.IOException;
 public class PhotoResult extends AppCompatActivity {
     private ImageView resultImageView;
     private Button checkResults;
-    private Button logOutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,6 @@ public class PhotoResult extends AppCompatActivity {
 
         resultImageView = findViewById(R.id.resultImageView);
         checkResults = findViewById(R.id.btnCheckResults);
-        logOutBtn = findViewById(R.id.logOut);
 
         // Retrieve the image URI from the intent
         String imageUri = getIntent().getStringExtra("imageUri");
@@ -56,11 +54,6 @@ public class PhotoResult extends AppCompatActivity {
         checkResults.setOnClickListener(view -> {
             Intent intent = new Intent(PhotoResult.this, RecycleResultScreen.class);
             intent.putExtra("imageURI", imageUri);
-            startActivity(intent);
-        });
-
-        logOutBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(PhotoResult.this, MainActivity.class);
             startActivity(intent);
         });
     }

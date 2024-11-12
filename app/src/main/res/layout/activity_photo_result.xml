@@ -7,24 +7,15 @@
     android:padding="16dp"
     android:background="@color/mainTheme"
     >
-    <Button
-        android:id="@+id/logOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/logOut" />
-
     <!-- ImageView at the top -->
     <ImageView
         android:id="@+id/resultImageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="387dp"
+        android:layout_height="512dp"
         android:layout_marginBottom="16dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true" />
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
 
     <!-- LinearLayout at the bottom for text and button -->
     <LinearLayout
@@ -43,6 +34,14 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
+        <!-- Button to go back to the WelcomeActivity -->
+        <Button
+            android:id="@+id/btnCheckResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Check Results" />
+
         <!-- TextView to display recyclability status -->
         <TextView
             android:id="@+id/item_recyclable_status"
@@ -52,14 +51,6 @@
             android:text="@string/recyclable_status"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
-
-        <!-- Button to go back to the WelcomeActivity -->
-        <Button
-            android:id="@+id/btnCheckResults"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Check Results" />
     </LinearLayout>
 
 </LinearLayout>

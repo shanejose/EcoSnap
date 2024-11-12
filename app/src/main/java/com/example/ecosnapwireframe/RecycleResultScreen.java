@@ -17,8 +17,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class RecycleResultScreen extends AppCompatActivity {
-
-    private Button logOut;
     private ImageButton camera;
     private ImageView userPic;
     private TextView googleMap;
@@ -34,7 +32,6 @@ public class RecycleResultScreen extends AppCompatActivity {
             return insets;
         });
 
-        logOut = findViewById(R.id.logOut);
         camera = findViewById(R.id.cameraButton);
         userPic = findViewById(R.id.userPic);
         googleMap = findViewById(R.id.googleMaps);
@@ -70,22 +67,6 @@ public class RecycleResultScreen extends AppCompatActivity {
         else{
             Log.v("Failed to go Home", "Error when clicked on Camera Image button");
         }
-
-        if (logOut != null){
-            // Goes to Log-in Screen when Log-Out button is clicked
-            logOut.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(RecycleResultScreen.this,
-                            MainActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
-        else{
-            Log.v("Failed to go to Log-in screen",
-                    "Error when clicked on Result screen of Login");
         }
 
     }
-}

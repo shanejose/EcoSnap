@@ -53,16 +53,4 @@
             android:text="Check Results"
             android:layout_marginTop="32dp" />
     </LinearLayout>
-    <Button
-        android:id="@+id/logOut"
-        android:layout_width="143dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/logOut"
-        app:layout_constraintBottom_toTopOf="@id/resultHeader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
-        app:layout_constraintStart_toStartOf="parent" />
 </LinearLayout>
