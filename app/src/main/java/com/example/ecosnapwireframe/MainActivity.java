@@ -61,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                authenticateUser(username.getText().toString(), password.getText().toString());
+                String uname = username.getText() != null ? username.getText().toString().trim() : "";
+                String pw = password.getText() != null ? password.getText().toString().trim() : "";
+
+                if (uname.isEmpty() || pw.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Username and Password cannot be empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    authenticateUser(uname, pw);
+                }
             }
         });
 
