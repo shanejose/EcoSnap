@@ -44,6 +44,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/gMapsUI"
+            android:textColor="@color/custom_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.902"

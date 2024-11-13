@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.googleServices)
@@ -7,6 +10,11 @@ plugins {
 android {
     namespace = "com.example.ecosnapwireframe"
     compileSdk = 34
+
+    val file = rootProject.file("local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(file))
+
 
     defaultConfig {
         applicationId = "com.example.ecosnapwireframe"
@@ -18,8 +26,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
 
-        resValue("string", "API_KEY", project.hasProperty("API_KEY").toString())
-       // buildConfigField("String", "MAPS_API_KEY",  project.hasProperty("API_KEY").toString())
+        resValue("string", "API_KEY", properties.getProperty("API_KEY"))
+
 
     }
 
@@ -37,6 +45,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
