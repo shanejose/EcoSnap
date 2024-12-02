@@ -20,6 +20,7 @@ public class RecycleResultScreen extends AppCompatActivity {
     private ImageButton camera;
     private ImageView userPic;
     private TextView googleMap;
+    private TextView picResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,19 @@ public class RecycleResultScreen extends AppCompatActivity {
         camera = findViewById(R.id.cameraButton);
         userPic = findViewById(R.id.userPic);
         googleMap = findViewById(R.id.googleMaps);
+        picResult = findViewById(R.id.result_instruction);
 
         String photoUri = getIntent().getStringExtra("imageURI");
+        String photoResult = getIntent().getStringExtra("imageResult");
 
         if(photoUri != null){
             Uri cameraPic = Uri.parse(photoUri);
             userPic.setImageURI(cameraPic);
             userPic.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+
+        if(photoResult != null){
+            picResult.setText(photoResult);
         }
 
         googleMap.setOnClickListener(new View.OnClickListener() {

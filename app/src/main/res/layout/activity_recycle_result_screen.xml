@@ -13,12 +13,12 @@
 
     <!-- Header TextView -->
     <TextView
-        android:id="@+id/resultHeader"
+        android:id="@+id/result_instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/recyclable"
+        android:text="Result Analysis"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -32,14 +32,7 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/plastic" />
 
-    <!-- Instruction TextView -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:text="@string/instruction2" />
+
 
     <!-- Google Maps TextView -->
     <TextView

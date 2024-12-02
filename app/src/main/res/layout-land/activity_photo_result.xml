@@ -32,18 +32,11 @@
             android:layout_height="wrap_content"
             android:text="@string/result_title"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_marginBottom="16dp" />
 
-        <!-- TextView to display recyclability status -->
-        <TextView
-            android:id="@+id/item_recyclable_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/recyclable_status"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
+
 
         <!-- Button to go back to the WelcomeActivity -->
         <Button

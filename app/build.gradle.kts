@@ -46,6 +46,7 @@ android {
     buildFeatures{
         viewBinding = true
         buildConfig = true
+        mlModelBinding = true
     }
 
     compileOptions {
@@ -63,6 +64,12 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.firebase.ui.auth)
     implementation(libs.play.services.auth)
+    implementation(libs.vision.common)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -84,6 +91,12 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.firebase.database)
     implementation(libs.googlePlayServicesBase)
+
+//    implementation("com.google.firebase:firebase-ml-vision:24.0.3")
+//    implementation("com.google.firebase:firebase-ml-vision-object-detection-model:19.0.6")
+//    implementation("com.google.mlkit:object-detection:17.0.0")
+//    implementation("com.google.mlkit:object-detection-custom:17.0.0")
+//    implementation("com.google.firebase:firebase-ml-vision-object-detection-model:19.0.3")
 
 
 }

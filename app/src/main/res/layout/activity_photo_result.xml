@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/result_title"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
@@ -42,15 +43,6 @@
             android:layout_marginTop="16dp"
             android:text="Check Results" />
 
-        <!-- TextView to display recyclability status -->
-        <TextView
-            android:id="@+id/item_recyclable_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/recyclable_status"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>
