@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +8,7 @@
     android:background="@color/mainTheme"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".RecycleResultScreen">
+    tools:context=".GoogleMaps">
 
     <!-- Header TextView -->
     <TextView
@@ -32,8 +31,6 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/plastic" />
 
-
-
     <!-- Google Maps TextView -->
     <TextView
         android:id="@+id/googleMaps"
@@ -41,12 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:gravity="center"
-        android:text="@string/gMapsUI"
-        android:textColor="@color/custom_blue" />
+        android:text="Click here to find the nearest recycling centers"
+        android:textColor="@color/custom_blue"
+        android:clickable="true"
+        android:focusable="true" />
 
     <!-- Camera Button -->
-
-    <!-- Logout Button -->
     <ImageButton
         android:id="@+id/cameraButton"
         android:layout_width="100dp"
@@ -59,3 +56,4 @@
         app:srcCompat="@drawable/camera" />
 
 </LinearLayout>
+
